@@ -18,21 +18,19 @@ export default {
     EventCard,
   },
   // con asyncData Nuxt aspettera' che la chiamata API finisca per renderizare la componente
-  asyncData({ $axios, error }) {
-    return $axios
-      .get('http://localhost:3000/events')
-      .then((response) => {
-        return {
-          events: response.data,
-        }
+  async asyncData({ $axios, error }) {
+    try {
+      // await ci permette di far runnare  prima la chiamata API e poi il codice js
+      const response = await $axios.get('http://localhost:3000/events')
+      return {
+        events: response.data,
+      }
+    } catch (e) {
+      error({
+        statusCode: 500,
+        message: 'Unable to fetch events at thi time. Please try again',
       })
-      .catch((e) => {
-        // eslint-disable-next-line no-undef
-        error({
-          statusCode: 500,
-          message: 'Unable to fetch events at thi time. Please try again',
-        })
-      })
+    }
   },
   // proprieta' usata da vue-meta
   head() {
