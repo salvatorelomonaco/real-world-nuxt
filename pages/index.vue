@@ -13,15 +13,17 @@
 
 <script>
 import EventCard from '@/components/EventCard.vue'
+import EventService from '@/services/EventService'
+
 export default {
   components: {
     EventCard,
   },
   // con asyncData Nuxt aspettera' che la chiamata API finisca per renderizare la componente
-  async asyncData({ $axios, error }) {
+  async asyncData({ error }) {
     try {
       // await ci permette di far runnare  prima la chiamata API e poi il codice js
-      const response = await $axios.get('http://localhost:3000/events')
+      const response = await EventService.getEvents()
       return {
         events: response.data,
       }
