@@ -14,6 +14,7 @@
     </svg>
     <div class="title">
       {{ message }}
+      <div>Status Code: {{ statusCode }}</div>
     </div>
     <p v-if="statusCode === 404">
       <nuxt-link to="/">
