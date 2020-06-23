@@ -1,16 +1,36 @@
 <template>
   <div id="app">
-    <nav-bar />
+    <!-- componente NavBar -->
+    <NavBar />
+    <!-- componente che renderizza le pages -->
     <Nuxt />
   </div>
 </template>
 
 <script>
+// importo le componenti
 import NavBar from '~/components/NavBar.vue'
 
+// esporto quello che devo usare in questo layout
 export default {
   components: {
     NavBar,
+  },
+  head() {
+    return {
+      // titolo e meta default per ogni pagina
+      // %s e' un segna libro che cambiera' a seconda del title della pagina
+      titleTemplate: '%s - Real World Events',
+      meta: [
+        {
+          // descrizione per la pagina
+          hid: 'description',
+          name: 'description',
+          content:
+            'Where you can find all the avents taking place in your neighborhood',
+        },
+      ],
+    }
   },
 }
 </script>
